@@ -1,0 +1,21 @@
+{
+    "name": "hexlet/code",
+    "description": "Test project for hexlet",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hexlet\\Code\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ilya Bogatov",
+            "email": "wolfofdeath@yandex.ru"
+        }
+    ],
+    "bin": [
+        "bin/brain-games"
+    ],
+    "require": {}
+}
