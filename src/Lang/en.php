@@ -5,6 +5,7 @@ return [
     'question-name' => 'May I have your name?',
     'greeting-name' => 'Hello, %username%!',
     'calculator-expression' => 'What is the result of the expression?',
+    'gcd-expression' => 'Find the greatest common divisor of given numbers.',
     'question' => 'Question: %question%',
     'your-answer' => 'Your answer',
     'correct' => 'Correct!',
