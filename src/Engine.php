@@ -94,14 +94,15 @@ class Engine
 
             $this->line('question', ['question' => $question->getQuestionString()]);
             $userAnswer = $this->prompt('your-answer');
-            if ($question->isCorrect($userAnswer)) {
+            $correct = $this->getMessage($question->correctAnswer());
+            if ($userAnswer === $correct) {
                 $wins++;
                 $this->line('correct');
                 continue;
             }
 
             $wins = 0;
-            $this->line('wrong', ['wronganswer' => $userAnswer, 'correctanswer' => $question->correctAnswer()]);
+            $this->line('wrong', ['wronganswer' => $userAnswer, 'correctanswer' => $correct]);
             $this->line('try-again', ['username' => $this->username]);
         }
 

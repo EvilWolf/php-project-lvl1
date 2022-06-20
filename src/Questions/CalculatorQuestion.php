@@ -33,16 +33,6 @@ class CalculatorQuestion implements QuestionContract
     }
 
     /**
-     * Check answer is correct
-     * @param string $answer
-     * @return bool
-     */
-    public function isCorrect(string $answer): bool
-    {
-        return $this->correctAnswer === $answer;
-    }
-
-    /**
      * Return correct answer as string
      * @return string
      */
