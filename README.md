@@ -37,3 +37,10 @@ https://ru.hexlet.io/programs/php/projects/45
 Демонстрация работы: https://asciinema.org/a/503148  
 Запуск:  
 `$ make brain-progression`
+
+### Игра Brain Game Prime
+Пользователю загадывается число в диапазоне от 1 до 99, необходимо угодать является ли число простым. Победа наступает в случае 3 выигрышей подряд.    
+Демонстрация работы: https://asciinema.org/a/503155  
+Запуск:  
+`$ make brain-prime`
+

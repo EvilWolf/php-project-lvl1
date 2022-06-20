@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+require_once (__DIR__ . '/../vendor/autoload.php');
+
+use BrainGames\Engine;
+use BrainGames\Games\Prime;
+
+$engine = new Engine();
+$engine->startGame(new Prime());
