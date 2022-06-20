@@ -1,4 +1,6 @@
 ### Первый контрольный проект на hexlet.io по профессии PHP-программист
+Описание проекта на сайте hexlet.io  
+https://ru.hexlet.io/programs/php/projects/45
 
 ### Hexlet tests and linter status:
 [![MIT License](https://img.shields.io/github/license/EvilWolf/php-project-lvl1)](https://github.com/EvilWolf/php-project-lvl1/blob/main/LICENSE)
