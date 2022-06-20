@@ -6,6 +6,7 @@ return [
     'greeting-name' => 'Hello, %username%!',
     'calculator-expression' => 'What is the result of the expression?',
     'gcd-expression' => 'Find the greatest common divisor of given numbers.',
+    'progression-expression' => 'What number is missing in the progression?',
     'question' => 'Question: %question%',
     'your-answer' => 'Your answer',
     'correct' => 'Correct!',

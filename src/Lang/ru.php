@@ -6,6 +6,7 @@ return [
     'greeting-name' => 'Привет, %username%!',
     'calculator-expression' => 'Какой результат данного выражения?',
     'gcd-expression' => 'Найдите наибольший общий делитьель для двух чисел.',
+    'progression-expression' => 'Какое число пропущено в арифметической прогрессии?',
     'question' => 'Вопрос: %question%',
     'your-answer' => 'Ваш ответ',
     'correct' => 'Верно!',
