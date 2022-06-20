@@ -17,7 +17,7 @@ class PrimeQuestion implements QuestionContract
     public function __construct()
     {
         $this->question = $this->getRandomNumber();
-        if (gmp_prob_prime($this->question) === 2) {
+        if ($this->isPrime($this->question)) {
             $this->correctAnswer = 'yes';
         } else {
             $this->correctAnswer = 'no';
@@ -47,5 +47,15 @@ class PrimeQuestion implements QuestionContract
     public function getRandomNumber(): int
     {
         return rand(1, 99);
+    }
+
+    public function isPrime($number): bool
+    {
+        for ($x = 2; $x < $number; $x++) {
+            if ($number % $x === 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
