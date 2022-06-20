@@ -106,9 +106,9 @@ class Engine
                 continue;
             }
 
-            $wins = 0;
             $this->line('wrong', ['wronganswer' => $userAnswer, 'correctanswer' => $correct]);
             $this->line('try-again', ['username' => $this->username]);
+            return; // Exit if answer not correct
         }
 
         $this->line('congratulations', ['username' => $this->username]);
