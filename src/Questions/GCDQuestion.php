@@ -61,6 +61,6 @@ class GCDQuestion implements QuestionContract
      */
     private function calculateAnswer(int $left, int $right): string
     {
-        return gmp_gcd($left, $right);
+        return strval(($left % $right) ? $this->calculateAnswer($right, $left % $right) : $right);
     }
 }
