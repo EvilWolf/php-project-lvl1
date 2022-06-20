@@ -92,9 +92,14 @@ class Engine
         while ($wins < self::MAX_WINS) {
             $question = $this->game->getQuestion();
 
+            $correct = $question->correctAnswer();
+            if ($this->messages->exists($correct)) {
+                $correct = $this->getMessage($correct);
+            }
+
             $this->line('question', ['question' => $question->getQuestionString()]);
             $userAnswer = $this->prompt('your-answer');
-            $correct = $this->getMessage($question->correctAnswer());
+
             if ($userAnswer === $correct) {
                 $wins++;
                 $this->line('correct');
