@@ -14,7 +14,7 @@ return [
     'correct' => 'Correct!',
     'congratulations' => 'Congratulations, %username%!',
     'wrong' => '\'%wronganswer%\' is wrong answer ;(. Correct answer was \'%correctanswer%\'.',
-    'try-again' => 'Let\'s try again, %username%',
+    'try-again' => 'Let\'s try again, %username%!',
     'yes' => 'yes',
     'no' => 'no',
 ];
