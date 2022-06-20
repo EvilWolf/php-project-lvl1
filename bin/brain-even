@@ -2,4 +2,8 @@
 <?php
 require_once (__DIR__ . '/../vendor/autoload.php');
 
-BrainGames\Even\startGameEven();
+use BrainGames\Engine;
+use BrainGames\Games\Even;
+
+$engine = new Engine();
+$engine->startGame(new Even());

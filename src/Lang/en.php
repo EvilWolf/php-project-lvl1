@@ -8,6 +8,7 @@ return [
     'gcd-expression' => 'Find the greatest common divisor of given numbers.',
     'progression-expression' => 'What number is missing in the progression?',
     'prime-expression' => 'Answer "yes" if given number is prime. Otherwise answer "no".',
+    'even-expression' => 'Answer "yes" if the number is even, otherwise answer "no".',
     'question' => 'Question: %question%',
     'your-answer' => 'Your answer',
     'correct' => 'Correct!',

@@ -8,8 +8,7 @@
             "BrainGames\\": "src"
         },
         "files": [
-            "src/Cli.php",
-            "src/brain-even.php"
+            "src/Cli.php"
         ]
     },
     "authors": [
