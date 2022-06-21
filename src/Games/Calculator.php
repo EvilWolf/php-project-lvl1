@@ -3,6 +3,7 @@
 namespace BrainGames\Games\Calculator;
 
 use Exception;
+
 use function BrainGames\Engine\getRandomNumber;
 
 const MESSAGE_KEY = 'calculator-expression';

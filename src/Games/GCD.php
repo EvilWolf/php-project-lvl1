@@ -3,6 +3,7 @@
 namespace BrainGames\Games\GCD;
 
 use Exception;
+
 use function BrainGames\Engine\getRandomNumber;
 
 const MESSAGE_KEY = 'gcd-expression';

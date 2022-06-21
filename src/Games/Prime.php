@@ -3,6 +3,7 @@
 namespace BrainGames\Games\Prime;
 
 use Exception;
+
 use function BrainGames\Engine\getRandomNumber;
 
 const MESSAGE_KEY = 'prime-expression';
