@@ -1,116 +1,72 @@
 <?php
 
-namespace BrainGames;
-
-use BrainGames\Contracts\GameContract;
-use BrainGames\Lang\Messages;
-use Exception;
+namespace BrainGames\Engine;
 
 use function cli\line;
 use function cli\prompt;
 
-class Engine
+const MAX_WINS = 3;
+
+function getMessage(string $key, array $replace = [])
 {
-    private GameContract $game;
-    private Messages $messages;
-    private string $username;
-    private const MAX_WINS = 3;
+    $messages = [
+        'greeting' => 'Welcome to the Brain Games!',
+        'question-name' => 'May I have your name?',
+        'greeting-name' => 'Hello, %username%!',
+        'calculator-expression' => 'What is the result of the expression?',
+        'gcd-expression' => 'Find the greatest common divisor of given numbers.',
+        'progression-expression' => 'What number is missing in the progression?',
+        'prime-expression' => 'Answer "yes" if given number is prime. Otherwise answer "no".',
+        'even-expression' => 'Answer "yes" if the number is even, otherwise answer "no".',
+        'question' => 'Question: %question%',
+        'your-answer' => 'Your answer',
+        'correct' => 'Correct!',
+        'congratulations' => 'Congratulations, %username%!',
+        'wrong' => '\'%wronganswer%\' is wrong answer ;(. Correct answer was \'%correctanswer%\'.',
+        'try-again' => 'Let\'s try again, %username%!',
+    ];
 
-    /**
-     * @throws Exception
-     */
-    public function __construct($lang = 'en')
-    {
-        $this->messages = new Messages($lang);
-    }
+    $keys = array_map(fn($key) => "%$key%", array_keys($replace));
+    return str_replace($keys, array_values($replace), $messages[$key]);
+}
 
-    /**
-     * @throws Exception
-     */
-    public function startGame(GameContract $gameClass)
-    {
-        $this->game = $gameClass;
+function greeting(): string
+{
+    line(getMessage('greeting'));
+    $username = prompt(getMessage('question-name'), [], ' ');
+    line(getMessage('greeting-name', ['username' => $username]));
+    return $username;
+}
 
-        $this->greeting();
-        $this->runGameLoop();
-    }
+function startGame(string $questionMessageKey, callable $questionGenerator)
+{
+    $username = greeting();
+    line(getMessage($questionMessageKey));
 
-    /**
-     * @param string $key
-     * @param array $replace
-     * @return void
-     */
-    public function line(string $key, array $replace = [])
-    {
-        $message = $this->getMessage($key, $replace);
-        line($message);
-    }
+    $wins = 0;
+    while ($wins < MAX_WINS) {
+        [$questionString, $correctAnswer] = $questionGenerator();
+        line(getMessage('question', ['question' => $questionString]));
+        $userAnswer = prompt(getMessage('your-answer'));
 
-    /**
-     * @param string $key
-     * @param array $replace
-     * @param string $marker
-     * @return string
-     */
-    public function prompt(string $key, array $replace = [], string $marker = ': '): string
-    {
-        $message = $this->getMessage($key, $replace);
-        return prompt($message, false, $marker);
-    }
-
-    /**
-     * @param string $key
-     * @param array $replace
-     * @return string
-     */
-    private function getMessage(string $key, array $replace = []): string
-    {
-        return $this->messages->get($key, $replace);
-    }
-
-    /**
-     * @return void
-     */
-    private function greeting()
-    {
-        $this->line('greeting');
-        $this->username = $this->prompt('question-name', [], ' ');
-        $this->line('greeting-name', ['username' => $this->username]);
-
-        $messageKey = $this->game->getQuestionHeadMessageKey();
-        if (!empty($messageKey)) {
-            $this->line($messageKey);
-        }
-    }
-
-    /**
-     * @return void
-     */
-    private function runGameLoop()
-    {
-        $wins = 0;
-        while ($wins < self::MAX_WINS) {
-            $question = $this->game->getQuestion();
-
-            $correct = $question->correctAnswer();
-            if ($this->messages->exists($correct)) {
-                $correct = $this->getMessage($correct);
-            }
-
-            $this->line('question', ['question' => $question->getQuestionString()]);
-            $userAnswer = $this->prompt('your-answer');
-
-            if ($userAnswer === $correct) {
-                $wins++;
-                $this->line('correct');
-                continue;
-            }
-
-            $this->line('wrong', ['wronganswer' => $userAnswer, 'correctanswer' => $correct]);
-            $this->line('try-again', ['username' => $this->username]);
+        if ($userAnswer === $correctAnswer) {
+            $wins++;
+            line(getMessage('correct'));
+        } else {
+            line(getMessage('wrong', ['wronganswer' => $userAnswer, 'correctanswer' => $correctAnswer]));
+            line(getMessage('try-again', ['username' => $username]));
             return; // Exit if answer not correct
         }
-
-        $this->line('congratulations', ['username' => $this->username]);
     }
+
+    line(getMessage('congratulations', ['username' => $username]));
+}
+
+/**
+ * Random number between 1 and 99
+ * @return int
+ */
+function getRandomNumber(): int
+{
+    return rand(1, 99);
 }
