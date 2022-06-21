@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 require_once (__DIR__ . '/../vendor/autoload.php');
+require_once (__DIR__ . '/../src/Games/GCD.php');
 
-use BrainGames\Engine;
-use BrainGames\Games\GCD;
+use function BrainGames\Engine\startGame;
+use function BrainGames\Games\GCD\questionGenerator;
 
-$engine = new Engine();
-$engine->startGame(new GCD());
+startGame(BrainGames\Games\GCD\MESSAGE_KEY, questionGenerator());

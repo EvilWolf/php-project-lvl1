@@ -1,28 +1,58 @@
 <?php
 
-namespace BrainGames\Games;
+namespace BrainGames\Games\Calculator;
 
-use BrainGames\Contracts\GameContract;
-use BrainGames\Contracts\QuestionContract;
-use BrainGames\Questions\CalculatorQuestion;
+use Exception;
+use function BrainGames\Engine\getRandomNumber;
 
-class Calculator implements GameContract
+const MESSAGE_KEY = 'calculator-expression';
+
+/**
+ * Return closure with question generator
+ * @throws Exception
+ */
+function questionGenerator(): callable
 {
-    /**
-     * Return message key for headline question about all game.
-     * @return string
-     */
-    public function getQuestionHeadMessageKey(): string
-    {
-        return 'calculator-expression';
-    }
+    return function () {
+        $operator = getRandomOperator();
+        $left = getRandomNumber();
+        $right = getRandomNumber();
 
-    /**
-     * Return object for generate question for game
-     * @return QuestionContract
-     */
-    public function getQuestion(): QuestionContract
-    {
-        return new CalculatorQuestion();
+        $question = "$left $operator $right";
+        $correctAnswer = calculateAnswer($operator, $left, $right);
+
+        return [$question, $correctAnswer];
+    };
+}
+
+/**
+ * Random calculation operator
+ * @return string + - or *
+ */
+function getRandomOperator(): string
+{
+    $operators = ['-', '+', '*'];
+    return $operators[array_rand($operators)];
+}
+
+/**
+ * Calculate correct answer
+ * @param string $operator + - or *
+ * @param int $left operand
+ * @param int $right operand
+ * @return string answer
+ * @throws Exception
+ */
+function calculateAnswer(string $operator, int $left, int $right): string
+{
+    switch ($operator) {
+        case '+':
+            return $left + $right;
+        case '-':
+            return $left - $right;
+        case '*':
+            return $left * $right;
+        default:
+            throw new Exception("Operator $operator not implemented!");
     }
 }

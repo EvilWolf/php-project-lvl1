@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 require_once (__DIR__ . '/../vendor/autoload.php');
+require_once (__DIR__ . '/../src/Games/Calculator.php');
 
-use BrainGames\Engine;
-use BrainGames\Games\Calculator;
+use function BrainGames\Engine\startGame;
+use function BrainGames\Games\Calculator\questionGenerator;
 
-$engine = new Engine();
-$engine->startGame(new Calculator());
+startGame(BrainGames\Games\Calculator\MESSAGE_KEY, questionGenerator());

@@ -1,28 +1,40 @@
 <?php
 
-namespace BrainGames\Games;
+namespace BrainGames\Games\Prime;
 
-use BrainGames\Contracts\GameContract;
-use BrainGames\Contracts\QuestionContract;
-use BrainGames\Questions\PrimeQuestion;
+use Exception;
+use function BrainGames\Engine\getRandomNumber;
 
-class Prime implements GameContract
+const MESSAGE_KEY = 'prime-expression';
+
+/**
+ * Return closure with question generator
+ * @throws Exception
+ */
+function questionGenerator(): callable
 {
-    /**
-     * Return message key for headline question about all game.
-     * @return string
-     */
-    public function getQuestionHeadMessageKey(): string
-    {
-        return 'prime-expression';
-    }
+    return function () {
+        $question = getRandomNumber();
+        if (isPrime($question)) {
+            $correctAnswer = 'yes';
+        } else {
+            $correctAnswer = 'no';
+        }
+        return [$question, $correctAnswer];
+    };
+}
 
-    /**
-     * Return object for generate question for game
-     * @return QuestionContract
-     */
-    public function getQuestion(): QuestionContract
-    {
-        return new PrimeQuestion();
+/**
+ * Check is prime number
+ * @param $number
+ * @return bool
+ */
+function isPrime($number): bool
+{
+    for ($x = 2; $x < $number; $x++) {
+        if ($number % $x === 0) {
+            return false;
+        }
     }
+    return true;
 }

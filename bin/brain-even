@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 require_once (__DIR__ . '/../vendor/autoload.php');
+require_once (__DIR__ . '/../src/Games/Even.php');
 
-use BrainGames\Engine;
-use BrainGames\Games\Even;
+use function BrainGames\Engine\startGame;
+use function BrainGames\Games\Even\questionGenerator;
 
-$engine = new Engine();
-$engine->startGame(new Even());
+startGame(BrainGames\Games\Even\MESSAGE_KEY, questionGenerator());

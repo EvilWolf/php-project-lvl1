@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 require_once (__DIR__ . '/../vendor/autoload.php');
+require_once (__DIR__ . '/../src/Games/Progression.php');
 
-use BrainGames\Engine;
-use BrainGames\Games\Progression;
+use function BrainGames\Engine\startGame;
+use function BrainGames\Games\Progression\questionGenerator;
 
-$engine = new Engine();
-$engine->startGame(new Progression());
+startGame(BrainGames\Games\Progression\MESSAGE_KEY, questionGenerator());

@@ -1,31 +1,37 @@
 <?php
 
-namespace BrainGames\Games;
+namespace BrainGames\Games\GCD;
 
-use BrainGames\Contracts\GameContract;
-use BrainGames\Contracts\QuestionContract;
-use BrainGames\Questions\GCDQuestion;
+use Exception;
+use function BrainGames\Engine\getRandomNumber;
+
+const MESSAGE_KEY = 'gcd-expression';
 
 /**
- * Greatest common divisor game
+ * Return closure with question generator
+ * @throws Exception
  */
-class GCD implements GameContract
+function questionGenerator(): callable
 {
-    /**
-     * Return message key for headline question about all game.
-     * @return string
-     */
-    public function getQuestionHeadMessageKey(): string
-    {
-        return 'gcd-expression';
-    }
+    return function () {
+        $left = getRandomNumber();
+        $right = getRandomNumber();
 
-    /**
-     * Return object for generate question for game
-     * @return QuestionContract
-     */
-    public function getQuestion(): QuestionContract
-    {
-        return new GCDQuestion();
-    }
+        $question = "$left $right";
+        $correctAnswer = calculateAnswer($left, $right);
+
+        return [$question, $correctAnswer];
+    };
+}
+
+/**
+ * Calculate correct answer
+ * @param int $left number
+ * @param int $right number
+ * @return string answer
+ * @throws Exception
+ */
+function calculateAnswer(int $left, int $right): string
+{
+    return strval(($left % $right) ? calculateAnswer($right, $left % $right) : $right);
 }

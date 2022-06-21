@@ -1,28 +1,22 @@
 <?php
 
-namespace BrainGames\Games;
+namespace BrainGames\Games\Even;
 
-use BrainGames\Contracts\GameContract;
-use BrainGames\Contracts\QuestionContract;
-use BrainGames\Questions\EvenQuestion;
+use Exception;
+use function BrainGames\Engine\getRandomNumber;
 
-class Even implements GameContract
+const MESSAGE_KEY = 'even-expression';
+
+/**
+ * Return closure with question generator
+ * @throws Exception
+ */
+function questionGenerator(): callable
 {
-    /**
-     * Return message key for headline question about all game.
-     * @return string
-     */
-    public function getQuestionHeadMessageKey(): string
-    {
-        return 'even-expression';
-    }
+    return function () {
+        $question = getRandomNumber();
+        $correctAnswer = ($question % 2 === 0) ? 'yes' : 'no';
 
-    /**
-     * Return object for generate question for game
-     * @return QuestionContract
-     */
-    public function getQuestion(): QuestionContract
-    {
-        return new EvenQuestion();
-    }
+        return [$question, $correctAnswer];
+    };
 }
