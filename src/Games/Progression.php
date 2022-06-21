@@ -26,7 +26,7 @@ function questionGenerator(): callable
 
         // Hide one key
         $missedKey = array_rand($sequence);
-        $correctAnswer = $sequence[$missedKey];
+        $correctAnswer = strval($sequence[$missedKey]);
         $sequence[$missedKey] = '..';
 
         $question = implode(' ', $sequence);
