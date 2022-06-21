@@ -33,7 +33,7 @@ function getMessage(string $key, array $replace = [])
 function greeting(): string
 {
     line(getMessage('greeting'));
-    $username = prompt(getMessage('question-name'), false, ' ');
+    $username = prompt(getMessage('question-name'), '', ' ');
     line(getMessage('greeting-name', ['username' => $username]));
     return $username;
 }

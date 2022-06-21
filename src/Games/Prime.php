@@ -27,10 +27,10 @@ function questionGenerator(): callable
 
 /**
  * Check is prime number
- * @param $number
+ * @param int $number
  * @return bool
  */
-function isPrime($number): bool
+function isPrime(int $number): bool
 {
     for ($x = 2; $x < $number; $x++) {
         if ($number % $x === 0) {

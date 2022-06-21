@@ -34,5 +34,5 @@ function questionGenerator(): callable
  */
 function calculateAnswer(int $left, int $right): string
 {
-    return strval(($left % $right) ? calculateAnswer($right, $left % $right) : $right);
+    return strval(($left % $right !== 0) ? calculateAnswer($right, $left % $right) : $right);
 }
